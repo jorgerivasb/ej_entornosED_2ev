@@ -1,75 +1,107 @@
 package code;
 
-
+/**
+ * 
+ * @author Jorge Rivas
+ * @version 1.0
+ *
+ */
 public class MinimoComunMultiplo {
-  public MinimoComunMultiplo() {}
 
-  public int candidatosMcM(int[] args) {
-    if (args.length < 2) {
-      throw new IllegalArgumentException(
-        "Hacen falta dos o mÃ¡s nÃºmeros"
-      );
-    }
+	public MinimoComunMultiplo() {}
 
-    if (algunoEsCero(args)) {
-      throw new IllegalArgumentException(
-        "Los nÃºmeros no pueden ser cero"
-      );
-    }
+	/**
+	 * 
+	 * @param args es un array
+	 * @return este método devuelve el número máximo de números candidatos a minimo común múltiplo
+	 * @see abs
+	 */
+	  public int candidatosMcM(int[] args) {
+	    if (args.length < 2) {
+	      throw new IllegalArgumentException(
+	        "Hacen falta dos o más números"
+	      );
+	    }
 
-    args = abs(args);
+	    if (algunoEsCero(args)) {
+	      throw new IllegalArgumentException(
+	        "Los números no pueden ser cero"
+	      );
+	    }
 
-    int max = max(args);
-    int d = max;
+	    args = abs(args);
 
-    while (true) {
-      if (esMinimoComunMultiplo(d, args)) {
-        return d;
-      }
+	    int max = max(args);
+	    int d = max;
 
-      d += max;
-    }
-  }
+	    while (true) {
+	      if (esMinimoComunMultiplo(d, args)) {
+	        return d;
+	      }
 
-  private boolean algunoEsCero(int[] ints) {
-    for (int d : ints) {
-      if (d == 0) {
-        return true;
-      }
-    }
+	      d += max;
+	    }
+	  }
 
-    return false;
-  }
+	  /**
+	   * 
+	   * @param ints es un array de números 
+	   * @return este método devuelve un boolean que nos indica si algún caso de el array ints en igual a 0
+	   */
+	  private boolean algunoEsCero(int[] ints) {
+	    for (int d : ints) {
+	      if (d == 0) {
+	        return true;
+	      }
+	    }
 
-  private static int[] abs(int[] ints) {
-    int[] abs = new int[ints.length];
+	    return false;
+	  }
 
-    for (int i = 0; i < ints.length; i += 1) {
-      abs[i] = Math.abs(ints[i]);
-    }
+	  /**
+	   * 
+	   * @param ints es un array de enteros
+	   * @return nos devuelve un array con los posibles MCM 
+	   */
+	  private static int[] abs(int[] ints) {
+	    int[] abs = new int[ints.length];
 
-    return abs;
-  }
-  
+	    for (int i = 0; i < ints.length; i += 1) {
+	      abs[i] = Math.abs(ints[i]);
+	    }
 
-  private int max(int[] ints) {
-    int max = ints[0];
+	    return abs;
+	  }
+	  
+	  /**
+	   * 
+	   * @param ints es un array de enteros
+	   * @return nos devuelve el número máximo
+	   */
+	  private int max(int[] ints) {
+	    int max = ints[0];
 
-    for (int i = 1; i < ints.length; i += 1) {
-      max = Math.max(max, ints[i]);
-    }
+	    for (int i = 1; i < ints.length; i += 1) {
+	      max = Math.max(max, ints[i]);
+	    }
 
-    return max;
-  }
-  
+	    return max;
+	  }
+	  
+	  /**
+	   * 
+	   * @param d es un entero del que queremos comprobar si es el MCM
+	   * @param ints es un array de enteros
+	   * @return nos devuelve un boolean que nos indica si d es el mínimo común múltiplo
+	   */
+	  private boolean esMinimoComunMultiplo(int d, int[] ints) {
+	    for (int i = 0; i < ints.length; i += 1) {
+	      if (d % ints[i] != 0) {
+	        return false;
+	      }
+	    }
 
-  private boolean esMinimoComunMultiplo(int d, int[] ints) {
-    for (int i = 0; i < ints.length; i += 1) {
-      if (d % ints[i] != 0) {
-        return false;
-      }
-    }
-
-    return true;
-  }
+	    return true;
+	  }
+	
 }
